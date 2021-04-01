@@ -52,18 +52,71 @@ $table = [
 
         </div>
     <?php
-        /*
-    *   q1: ko dara funkcija get()
-    *   a1:
-    */
         if ($manager->get($r, $c) === '') {
             if ($manager->count() % 2 === 0) {
-                $manager->save($r, $c, "x");
+                $current_value = 'x';
             } else {
-                $manager->save($r, $c, "o");
+                $current_value = 'o';
             }
 
+            $manager->save($r, $c, $current_value);
+
             //START validation 
+            if (
+                $current_value == $manager->get(1, 1) &&
+                $current_value == $manager->get(1, 2) &&
+                $current_value == $manager->get(1, 3)
+            ) {
+                echo "Uzvarējis ir $current_value";
+            } elseif (
+                $current_value == $manager->get(2, 1) &&
+                $current_value == $manager->get(2, 2) &&
+                $current_value == $manager->get(2, 3)
+            ) {
+                echo "Uzvarējis ir $current_value";
+            } elseif (
+                $current_value == $manager->get(3, 1) &&
+                $current_value == $manager->get(3, 2) &&
+                $current_value == $manager->get(3, 3)
+            ) {
+                echo "Uzvarējis ir $current_value";
+            }
+            //Sākās kollonas
+            elseif (
+                $manager->get(1, 1) == $manager->get(2, 1) &&
+                $manager->get(1, 1) == $manager->get(3, 1) &&
+                $manager->get(1, 1) == $current_value
+            ) {
+                echo "Uzvarējis ir $current_value";
+            } elseif (
+                $manager->get(1, 2) == $manager->get(2, 2) &&
+                $manager->get(1, 2) == $manager->get(3, 2) &&
+                $manager->get(1, 2) == $current_value
+            ) {
+                echo "Uzvarējis ir $current_value";
+            } elseif (
+                $manager->get(1, 3) == $manager->get(2, 3) &&
+                $manager->get(1, 3) == $manager->get(3, 3) &&
+                $manager->get(1, 3) == $current_value
+            ) {
+                echo "Uzvarējis ir $current_value";
+            }
+            //Sākas dioganāle
+            elseif (
+                $manager->get(1, 1) == $manager->get(2, 2) &&
+                $manager->get(1, 1) == $manager->get(3, 3) &&
+                $manager->get(1, 1) == $current_value
+            ) {
+                echo "Uzvarējis ir $current_value";
+            } elseif (
+                $manager->get(1, 3) == $manager->get(2, 2) &&
+                $manager->get(1, 3) == $manager->get(3, 1) &&
+                $manager->get(1, 3) == $current_value
+            ) {
+                echo "Uzvarējis ir $current_value";
+            }
+
+            //END validation
         }
     endif; ?>
 
