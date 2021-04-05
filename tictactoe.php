@@ -83,35 +83,35 @@ $table = [
             }
             //Sākās kollonas
             elseif (
-                $manager->get(1, 1) == $manager->get(2, 1) &&
-                $manager->get(1, 1) == $manager->get(3, 1) &&
-                $manager->get(1, 1) == $current_value
+                $current_value == $manager->get(1, 1) &&
+                $current_value == $manager->get(2, 1) &&
+                $current_value == $manager->get(3, 1)
             ) {
                 echo "Uzvarējis ir $current_value";
             } elseif (
-                $manager->get(1, 2) == $manager->get(2, 2) &&
-                $manager->get(1, 2) == $manager->get(3, 2) &&
-                $manager->get(1, 2) == $current_value
+                $current_value == $manager->get(1, 2) &&
+                $current_value == $manager->get(2, 2) &&
+                $current_value == $manager->get(3, 2)
             ) {
                 echo "Uzvarējis ir $current_value";
             } elseif (
-                $manager->get(1, 3) == $manager->get(2, 3) &&
-                $manager->get(1, 3) == $manager->get(3, 3) &&
-                $manager->get(1, 3) == $current_value
+                $current_value == $manager->get(1, 3) &&
+                $current_value == $manager->get(2, 3) &&
+                $current_value == $manager->get(3, 3)
             ) {
                 echo "Uzvarējis ir $current_value";
             }
             //Sākas dioganāle
             elseif (
-                $manager->get(1, 1) == $manager->get(2, 2) &&
-                $manager->get(1, 1) == $manager->get(3, 3) &&
-                $manager->get(1, 1) == $current_value
+                $current_value == $manager->get(1, 1) &&
+                $current_value == $manager->get(2, 2) &&
+                $current_value == $manager->get(3, 3)
             ) {
                 echo "Uzvarējis ir $current_value";
             } elseif (
-                $manager->get(1, 3) == $manager->get(2, 2) &&
-                $manager->get(1, 3) == $manager->get(3, 1) &&
-                $manager->get(1, 3) == $current_value
+                $current_value == $manager->get(1, 3) &&
+                $current_value == $manager->get(2, 2) &&
+                $current_value == $manager->get(3, 1)
             ) {
                 echo "Uzvarējis ir $current_value";
             }
