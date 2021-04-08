@@ -26,8 +26,7 @@ if (
             $current_value = 'o';
         }
         $manager->save($r, $c, $current_value);
-        $validator->check($r, $c, $current_value, -1);
-        $validator->check($r, $c, $current_value, 1);
+        $validator->validate($r, $c, $current_value);
     }
 } elseif (
     array_key_exists('restart', $_GET) &&
