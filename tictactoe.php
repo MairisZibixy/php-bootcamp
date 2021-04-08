@@ -6,6 +6,9 @@ include "DataManager.php";
 $manager = new DataManager('db.json');
 $winner = new DataManager('winner.json');
 
+include "Validator.php";
+$validator = new Validator('db.json', 2);
+
 ?>
 <style>
     .tictac {
@@ -73,72 +76,11 @@ $table = [
             $manager->save($r, $c, $current_value);
 
             //START validation
-            //Sākas rindas 
-            if (
-                $current_value == $manager->get(1, 1) &&
-                $current_value == $manager->get(1, 2) &&
-                $current_value == $manager->get(1, 3)
-            ) {
-                echo "Uzvarējis ir $current_value";
-                $winner->save(0, 'winner', $current_value);
-            } elseif (
-                $current_value == $manager->get(2, 1) &&
-                $current_value == $manager->get(2, 2) &&
-                $current_value == $manager->get(2, 3)
-            ) {
-                echo "Uzvarējis ir $current_value";
-                $winner->save(0, 'winner', $current_value);
-            } elseif (
-                $current_value == $manager->get(3, 1) &&
-                $current_value == $manager->get(3, 2) &&
-                $current_value == $manager->get(3, 3)
-            ) {
-                echo "Uzvarējis ir $current_value";
+            $alert = $validator->validate($r, $c, $current_value);
+            if ($alert) {
+                echo "$alert Uzvarējis ir $current_value";
                 $winner->save(0, 'winner', $current_value);
             }
-            //Sākās kollonas
-            elseif (
-                $current_value == $manager->get(1, 1) &&
-                $current_value == $manager->get(2, 1) &&
-                $current_value == $manager->get(3, 1)
-            ) {
-                echo "Uzvarējis ir $current_value";
-                $winner->save(0, 'winner', $current_value);
-            } elseif (
-                $current_value == $manager->get(1, 2) &&
-                $current_value == $manager->get(2, 2) &&
-                $current_value == $manager->get(3, 2)
-            ) {
-                echo "Uzvarējis ir $current_value";
-                $winner->save(0, 'winner', $current_value);
-            } elseif (
-                $current_value == $manager->get(1, 3) &&
-                $current_value == $manager->get(2, 3) &&
-                $current_value == $manager->get(3, 3)
-            ) {
-                echo "Uzvarējis ir $current_value";
-                $winner->save(0, 'winner', $current_value);
-            }
-            //Sākas dioganāle
-            elseif (
-                $current_value == $manager->get(1, 1) &&
-                $current_value == $manager->get(2, 2) &&
-                $current_value == $manager->get(3, 3)
-            ) {
-                echo "Uzvarējis ir $current_value";
-                $winner->save(0, 'winner', $current_value);
-            } elseif (
-                $current_value == $manager->get(1, 3) &&
-                $current_value == $manager->get(2, 2) &&
-                $current_value == $manager->get(3, 1)
-            ) {
-                echo "Uzvarējis ir $current_value";
-                $winner->save(0, 'winner', $current_value);
-            } elseif ($manager->count() === 9) {
-                echo "Spēlē ir neišķirts";
-                $winner->save(0, 'winner', 'N');
-            }
-
             //END validation
         }
     } ?>

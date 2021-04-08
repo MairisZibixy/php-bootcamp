@@ -2,6 +2,13 @@
 class Validator extends DataManager
 {
     private $count = 0;
+    private $line_lenght;
+
+    public function __construct($filename, $line_lenght)
+    {
+        $this->line_lenght = $line_lenght;
+        parent::__construct($filename);
+    }
 
     /*
      * @param integer $r -  variable(id of current row)
@@ -12,7 +19,7 @@ class Validator extends DataManager
     {
         $rules = [
             [[0, -1], [0, 1]],
-            [[1, 0]],
+            [[1, 0], [-1, 0]],
             [[1, 1], [-1, -1]],
             [[1, -1], [-1, 1]],
         ];
@@ -20,12 +27,13 @@ class Validator extends DataManager
             foreach ($rule as $cords) {
                 $this->check($r, $c, $current_value, $cords[0], $cords[1]);
             }
-            if ($this->count >= 3) {
-                echo "Spēlē ir uzvarēta!";
-                return;
+            if ($this->count >= $this->line_lenght) {
+                return "Spēlē ir uzvarēta!";
             }
             $this->count = 0;
         }
+
+        return false;
     }
 
     /*
@@ -38,7 +46,7 @@ class Validator extends DataManager
     {
         $r_new = $r;
         $c_new = $c;
-        for ($i = 1; $i <= 3; $i++) {
+        for ($i = 1; $i <= $this->line_lenght; $i++) {
             $r_new = $r_new  + $r_diff;
             $c_new = $c_new + $c_diff;
             if ($current === $this->get($r_new, $c_new)) {
