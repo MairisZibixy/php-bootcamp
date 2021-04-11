@@ -6,13 +6,16 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link <?= ($page === 'main') ? "active" : ''; ?>" aria-current="page" href="index.php">#1 Greating exmaple</a>
+                    <a class="nav-link <?= ($page === 'main') ? "active" : ''; ?>" aria-current="page" href="index.php">#1 Greating example</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= ($page === 'tictactoe') ? "active" : ''; ?>" href="tictactoe.php">#2 tictactoe</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link <?= ($page === 'four_in_line') ? "active" : ''; ?>" href="four_in_line.php">#3 Four in line</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link <?= ($page === '42_link') ? "active" : ''; ?>" href="42_link.php">#4 42 Link</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
