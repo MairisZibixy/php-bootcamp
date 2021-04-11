@@ -39,15 +39,19 @@ $manager = new DataManager('42_data.json');
             $amount = 42;
         }
     }
-    //Saglabā submitoto skaitli
+    //Saglabā submitoto skaitli linku izvades daudzumam
     $manager->save('amount', 0, $amount);
 
+    //Saglabā 'id' lai varētu to palielināt ar katru klikšķi uz linka
+    $manager->save('id', 0, $_GET);
     //Pēc 1:20h cīņas izdevās izveidot alertu katram trešajam linkam :)
     if (
+        //Pārbauda adrešu joslā ievadīto id, vai tas dalās ar 3  
         array_key_exists('id', $_GET) &&
         ($_GET['id'] % 3 === 0) &&
         $r = $_GET['id']
     ) {
+        //Izvada $r kad piepildās IF nosacījumi
         echo '<div class="alert alert-danger">';
         echo 'Šis ir ' . $r . '.' . ' links';
         echo '</div>';
