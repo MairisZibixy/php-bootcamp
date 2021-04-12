@@ -45,6 +45,9 @@ $manager = new DataManager('42_data.json');
     if (array_key_exists('next', $_GET)) {
         $amount++;
     }
+    if (array_key_exists('previous', $_GET)) {
+        $amount--;
+    }
     //Saglabā submitoto skaitli linku izvades daudzumam
     $manager->save('amount', 0, $amount);
 
@@ -82,4 +85,5 @@ $manager = new DataManager('42_data.json');
     }
     ?>
     <a href="?next" class="btn btn-info">+</a>
+    <a href="?previous" class="btn btn-info">-</a>
 </div>
