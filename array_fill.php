@@ -4,42 +4,141 @@ $page = 'array_fill';
 
 ?>
 
-<div class="container"><?php
-                        include "head.php";
-                        $page = 'array_fill';
+<style>
+    td {
+        border: 1px solid black;
+    }
+</style>
 
-                        ?>
+<div class="container">
+    <?php include "navigation.php";
 
-    <style>
-        td {
-            border: 1px solid black;
+    $template = [
+        [0, 0, 0],
+        [0, 0, 0],
+        [0, 0, 0]
+    ];
+
+    /*
+    Piemērs #1
+        [x, x, x],
+        [x, x, x],
+        [x, x, x]
+    */
+    $table = $template;
+    for ($r = 0; $r <= 2; $r++) {
+        for ($c = 0; $c <= 2; $c++) {
+            $table[$r][$c] = 'x';
         }
-    </style>
-
-    <div class="container">
-        <?php include "navigation.php"; ?>
-
-    </div>
-
-
-    <?php
-
-    function printTable($table)
-    {
-        echo "<table>";
-        for ($i = 0; $i <= 2; $i++) {
-            echo "<tr>";
-            for ($i = 0; $i <= 2; $i++) {
-                echo "<td>";
-                echo $i;
-                echo "</td>";
-            }
-            echo "</tr>";
-        }
-        echo "</table>";
     }
 
+    printTable($table);
+
+    /*
+    Piemērs #2
+        [x, 0, x],
+        [x, 0, x],
+        [x, 0, x]
+    */
+    $table = $template;
+    for ($r = 0; $r <= 2; $r++) {
+        for ($c = 0; $c <= 2; $c += 2) {
+            $table[$r][$c] = 'x';
+        }
+    }
+    printTable($table);
+
+    /*
+    Piemērs #3
+        [x, x, x],
+        [x, x, x],
+        [0, 0, 0]
+    */
+    $table = $template;
+    for ($r = 0; $r <= 1; $r++) {
+        for ($c = 0; $c <= 2; $c++) {
+            $table[$r][$c] = 'x';
+        }
+    }
+    printTable($table);
+
+    /*
+    Piemērs #4
+        [x, 0, 0],
+        [0, x, 0],
+        [0, 0, x]
+    */
+    $table = $template;
+    for ($r = 0; $r <= 3; $r++) {
+        $table[$r][$r] = 'x';
+    }
+    printTable($table);
+    /*
+    Piemērs #5 - Paliku šajā - jāizmanto if nosacījums
+        [0, 0, x],
+        [0, 0, x],
+        [x, x, x]
+    */
+    $table = $template;
+    for ($r = 2; $r <= 3; $r++) {
+        for ($c = 0; $c <= 3; $c++) {
+            $table[$r][$c] = 'x';
+            if ($r = 5) {
+                echo "'$c = x'";
+            }
+        }
+    }
+    printTable($table);
+
+    /*
+    Piemērs #6 - Līdzīgs ar 2.uzd, Aizpildīšanas viriezns uz otru pusi kollonu sākt index 2 - 2, rindas no 2. uz 0. 
+        [6, 0, 5],
+        [4, 0, 3],
+        [2, 0, 1]
+    */
+    $table = $template;
+    printTable($table);
+
+    /*
+    Piemērs #7 - Fibunači virkne
+        [8, 0, 5],
+        [3, 0, 2],
+        [1, 0, 1]
+    */
+    $table = $template;
+    printTable($table);
+
+    /*
+    Piemērs #8 Hibunači virkne
+        [5, -1, 1],
+        [-8, 2, 0],
+        [13, -3, 1]
+    */
+    $table = $template;
+    printTable($table);
     ?>
-    <?php include "navigation.php"; ?>
 
 </div>
+
+
+<?php
+
+function printTable($table)
+{
+    static $count = 0;
+    $count++;
+    echo "<h2>$count</h2>";
+    echo "<table>";
+    for ($i = 0; $i <= 2; $i++) {
+        echo "<tr>";
+        for ($k = 0; $k <= 2; $k++) {
+            echo "<td>";
+            echo $table[$i][$k];
+            echo "</td>";
+        }
+        echo "</tr>";
+    }
+    echo "</table><br>";
+}
+
+?>
