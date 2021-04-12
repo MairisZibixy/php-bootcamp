@@ -29,21 +29,25 @@ $manager = new DataManager('42_data.json');
 
 
     <?php
+
     // Pārbauda vai adrešu joslā ir submitots skaitlis (integers)
     if (array_key_exists('amount', $_GET)) {
         $amount = (int) $_GET['amount'];
         //Nolasa adrešu joslai submitoto skaitli
     } else {
         $amount = $manager->get('amount', 0);
-        if ($amount == '') {
-            $amount = 42;
-        }
+    }
+
+    if ($amount == '') {
+        $amount = 42;
+    }
+
+    if (array_key_exists('next', $_GET)) {
+        $amount++;
     }
     //Saglabā submitoto skaitli linku izvades daudzumam
     $manager->save('amount', 0, $amount);
 
-    //Saglabā 'id' lai varētu to palielināt ar katru klikšķi uz linka
-    $manager->save('id', 0, $_GET);
     //Pēc 1:20h cīņas izdevās izveidot alertu katram trešajam linkam :)
     if (
         //Pārbauda adrešu joslā ievadīto id, vai tas dalās ar 3  
@@ -55,13 +59,27 @@ $manager = new DataManager('42_data.json');
         echo '<div class="alert alert-danger">';
         echo 'Šis ir ' . $r . '.' . ' links';
         echo '</div>';
+        //Start
+        //Ņem vērtību no manager datubāzes
+        $id_value = $manager->get('id', $r);
+        if ($id_value === '') {
+            $id_value = $r;
+        }
+        //Saglabā 'id' lai varētu to palielināt ar katru klikšķi uz linka
+        $manager->save('id', $r, ++$id_value);
     }
+
+
 
     //Katrs sestais izvadītais links izvadīs btn-danger, pārējie btn-dark
     for ($i = 1; $i <= $amount; $i++) {
+        $value = $manager->get('id', $i);
+        if ($value === '') {
+            $value = $i;
+        }
         $class_name = ($i % 6 === 0) ? 'btn-danger' : 'btn-dark';
-        echo "<a href='?id=$i' class='btn $class_name'>$i</a>";
+        echo "<a href='?id=$i' class='btn $class_name'>$value</a>";
     }
-
     ?>
+    <a href="?next" class="btn btn-info">+</a>
 </div>
